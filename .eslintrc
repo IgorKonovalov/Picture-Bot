@@ -1,0 +1,12 @@
+{
+  "extends": ["prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "max-len": ["error", 120]
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  },
+}

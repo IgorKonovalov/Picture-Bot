@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+# url list for uploading
+
+/src/picture-list.json
