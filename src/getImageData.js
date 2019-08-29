@@ -42,5 +42,5 @@ module.exports = async function getImageData(imageUrl) {
     console.log(e);
   }
 
-  return { albumName, LargeImageUrl, year };
+  return { albumName, LargeImageUrl, year, original: imageUrl };
 };

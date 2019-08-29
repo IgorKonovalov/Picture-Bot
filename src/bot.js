@@ -6,28 +6,42 @@ const { toShow } = imagesData;
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-const sendImageAndYear = async ({ LargeImageUrl, year, albumName }) => {
-  await bot.telegram.sendPhoto(process.env.CHANNEL_ID, LargeImageUrl);
-  await bot.telegram.sendMessage(
-    process.env.CHANNEL_ID,
-    `${year} ${albumName}`
-  );
+const sendImageAndYear = async ({
+  LargeImageUrl,
+  year,
+  albumName,
+  original
+}) => {
+  await bot.telegram.sendPhoto(process.env.CHANNEL_ID, LargeImageUrl, {
+    parse_mode: 'HTML',
+    caption: `${year} ${albumName} 
+${original}`,
+    disable_notification: true
+  });
 };
 
-const replyWithImageAndYear = ({ LargeImageUrl, year, albumName, ctx }) => {
-  ctx
-    .replyWithPhoto(LargeImageUrl)
-    .then(() => ctx.reply(`${year} ${albumName}`));
+const replyWithImageAndYear = ({
+  LargeImageUrl,
+  year,
+  albumName,
+  ctx,
+  original
+}) => {
+  ctx.replyWithPhoto(LargeImageUrl, {
+    parse_mode: 'HTML',
+    caption: `${year} ${albumName} 
+${original}`
+  });
 };
 
 (async () => {
   let randomPicIndex = Math.floor(Math.random() * toShow.length);
 
-  const { albumName, LargeImageUrl, year } = await getImageData(
+  const { albumName, LargeImageUrl, year, original } = await getImageData(
     toShow[randomPicIndex]
   );
 
-  await sendImageAndYear({ LargeImageUrl, year, albumName });
+  await sendImageAndYear({ LargeImageUrl, year, albumName, original });
 
   setInterval(async () => {
     randomPicIndex = Math.floor(Math.random() * toShow.length);
@@ -49,7 +63,7 @@ bot.hears('Picture', async ctx => {
   let imageData;
   let individualRandomPicIndex = Math.floor(Math.random() * toShow.length);
 
-  const { albumName, LargeImageUrl, year } = await getImageData(
+  const { albumName, LargeImageUrl, year, original } = await getImageData(
     toShow[individualRandomPicIndex]
   );
 
@@ -57,6 +71,7 @@ bot.hears('Picture', async ctx => {
     albumName,
     LargeImageUrl,
     year,
+    original,
     ctx
   });
 });
