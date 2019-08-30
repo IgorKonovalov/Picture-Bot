@@ -15,7 +15,7 @@ const sendImageAndYear = async ({
   await bot.telegram.sendPhoto(process.env.CHANNEL_ID, LargeImageUrl, {
     parse_mode: 'HTML',
     caption: `${year} ${albumName} 
-${original}`,
+<a href="${original}">Original</a>`,
     disable_notification: true
   });
 };
@@ -30,7 +30,7 @@ const replyWithImageAndYear = ({
   ctx.replyWithPhoto(LargeImageUrl, {
     parse_mode: 'HTML',
     caption: `${year} ${albumName} 
-${original}`
+<a href="${original}">Original</a>`,
   });
 };
 
