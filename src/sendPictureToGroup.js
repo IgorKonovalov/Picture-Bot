@@ -1,12 +1,8 @@
 const getImageData = require('./getImageData');
-const Telegraf = require('telegraf');
-const imagesData = require('./imagesData.json');
+const imagesData = require('./data/imagesData.json');
+const bot = require('./initializeBot.js');
 
 const { toShow } = imagesData;
-
-const bot = new Telegraf(process.env.BOT_TOKEN);
-
-bot.launch().then(() => console.log('bot is started'));
 
 const sendImageAndYear = async ({
   LargeImageUrl,
@@ -32,12 +28,4 @@ const sendPicture = async () => {
   await sendImageAndYear({ LargeImageUrl, year, albumName, original });
 };
 
-sendPicture()
-  .then(() => {
-    console.log('image is sent, stopping bot now');
-    bot.stop();
-  })
-  .then(() => {
-    console.log('bot stopped');
-    process.exit();
-  });
+sendPicture();
