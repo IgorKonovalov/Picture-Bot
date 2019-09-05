@@ -18,7 +18,7 @@ const sendImageAndYear = async ({
   });
 };
 
-const sendPicture = async () => {
+const sendPicture = async counter => {
   let randomPicIndex = Math.floor(Math.random() * toShow.length);
 
   const { albumName, LargeImageUrl, year, original } = await getImageData(
@@ -26,6 +26,20 @@ const sendPicture = async () => {
   );
 
   await sendImageAndYear({ LargeImageUrl, year, albumName, original });
+
+  return counter;
 };
 
-sendPicture();
+const sendPictureGenerator = async function*() {
+  for (let i = 0; i <= process.env.IMAGES_COUNT; i++) {
+    yield await sendPicture(i);
+  }
+};
+
+const sendPictureIterator = sendPictureGenerator();
+
+(async function() {
+  for await (const pictureCount of sendPictureIterator) {
+    console.log(`picture number ${pictureCount} sent`);
+  }
+})();
