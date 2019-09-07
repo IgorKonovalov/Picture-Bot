@@ -62,4 +62,4 @@ typings/
 
 # url list for uploading
 
-src/imagesData.json
+src/data/imagesData.json
