@@ -5,7 +5,7 @@ It works through heroku scheduler, see [scheduler docs](https://devcenter.heroku
 
 While scheduler is initializing app. it starts index.js (package.json start command), it calls initializeBot.js, and than scheduler executes sendPictureToGroup.js
 
-You need a list of public links uploaded to Smugmug.
+You'll need a list of public links uploaded to Smugmug as array of strings (see examples).
 
 See .env_example and src/data/imagesData_example.json for example of parameters you'll need in order to use bot
 
