@@ -8,12 +8,16 @@ const sendImageAndYear = async ({
   LargeImageUrl,
   year,
   albumName,
-  original
+  original,
+  tags
 }) => {
+  const tagsString = tags.map(el => `#${el}`).join(' ');
+
   await bot.telegram.sendPhoto(process.env.CHANNEL_ID, LargeImageUrl, {
     parse_mode: 'HTML',
     caption: `${year} ${albumName} 
-<a href="${original}">Original</a>`,
+<a href="${original}">Original</a>
+${tagsString}`,
     disable_notification: true
   });
 };

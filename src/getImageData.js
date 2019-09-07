@@ -31,6 +31,12 @@ module.exports = async function getImageData(imageUrl) {
 
     albumName = albumData.data.Response.Album.Name;
 
+    const tags = albumName
+      .split(' ')
+      .pop()
+      .split('-')
+      .map(el => el.toLowerCase());
+
     // lookup for image sizes
     const imageSizesUrl = data.Response.AlbumImage.Uris.ImageSizes.Uri;
     const imageSizes = await axiosInstance.get(
@@ -42,5 +48,5 @@ module.exports = async function getImageData(imageUrl) {
     console.log(e);
   }
 
-  return { albumName, LargeImageUrl, year, original: imageUrl };
+  return { albumName, LargeImageUrl, year, original: imageUrl, tags };
 };
