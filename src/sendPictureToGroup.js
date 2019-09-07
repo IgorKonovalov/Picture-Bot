@@ -25,11 +25,11 @@ ${tagsString}`,
 const sendPicture = async counter => {
   let randomPicIndex = Math.floor(Math.random() * toShow.length);
 
-  const { albumName, LargeImageUrl, year, original } = await getImageData(
+  const { albumName, LargeImageUrl, year, original, tags } = await getImageData(
     toShow[randomPicIndex]
   );
 
-  await sendImageAndYear({ LargeImageUrl, year, albumName, original });
+  await sendImageAndYear({ LargeImageUrl, year, albumName, original, tags });
 
   return counter;
 };

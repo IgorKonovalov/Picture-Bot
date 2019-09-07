@@ -10,6 +10,7 @@ module.exports = async function getImageData(imageUrl) {
   let albumName;
   let year;
   let LargeImageUrl;
+  let tags;
 
   try {
     const lookupData = await axiosInstance.get(
@@ -31,7 +32,7 @@ module.exports = async function getImageData(imageUrl) {
 
     albumName = albumData.data.Response.Album.Name;
 
-    const tags = albumName
+    tags = albumName
       .split(' ')
       .pop()
       .split('-')
